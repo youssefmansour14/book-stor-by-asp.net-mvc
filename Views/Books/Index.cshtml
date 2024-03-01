@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Day3.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+<partial name="_Notifications"/>
+<div>
+    @{
+        Html.RenderPartial("_Notifications");
+    }
+</div>
+
+<h2 class="text-success">Books</h2>
+
+<hr />
+<Partial Name="_Notifications" />
+<a href="@Url.Action("Create")" class="btn btn-success my-4">
+    + Add New
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Category.Name</td>
+
+                    <td>
+                        <a href="@Url.Action("Edit", new {id = book.Id})" class="btn btn-success">
+                            <i class="icofont-edit"></i>
+                            Edit
+                        </a>
+                        <a href="@Url.Action("Delete", new {id = book.Id})" class="btn btn">
+                            Delete
+</tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No books found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

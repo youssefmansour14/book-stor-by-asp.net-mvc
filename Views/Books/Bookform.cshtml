@@ -1,0 +1,42 @@
+﻿@model Day3.ViewModels.BookFormViewmodel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="text-primary">
+    @(Model.Id == 0 ? "Add New Book" : "Edit Book")
+   
+</h2>
+<hr />
+@using (Html.BeginForm("Save", "Books"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "from-control" })
+        @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Author)
+        @Html.TextBoxFor(m => m.Author, new { @class = "from-control" })
+        @Html.ValidationMessageFor(m => m.Author, null, new { @class = "text-danger" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId)
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.categories, "Id", "Name"), "", new { @class = "from-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "text-danger" })
+    </div>
+    <br />
+    <br />
+
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    @section Scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval")
+
+    }
+}
